@@ -1,4 +1,5 @@
 # turtle_lab2.py
+# Draw a stick figure
 
 import turtle
 # head

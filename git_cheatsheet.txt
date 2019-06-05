@@ -12,9 +12,9 @@ git clone <url> e.g. https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
 
 git push -u origin master
 
-###################################
-# Checking out & in code (run often
-###################################
+####################################
+# Checking out & in code (run often)
+####################################
 
 git status
 

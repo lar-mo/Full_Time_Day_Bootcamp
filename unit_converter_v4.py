@@ -37,6 +37,7 @@ unit_dict_in = { "ft": 0.3048, "feet": 0.3048,
 # Convert from input(unit) to meters
 converted_dist_in_m = int(input_distance) * unit_dict_in[input_units]
 
+# Define unit conversion (library) for meters ==> feet, miles, meters, kilometers
 unit_dict_out = { "ft": 3.2808398950131, "feet": 3.2808398950131,
             "mi": 0.00062137119223733, "miles": 0.00062137119223733, "mile": 0.00062137119223733,
             "m": 1, "meters": 1, "meter": 1,

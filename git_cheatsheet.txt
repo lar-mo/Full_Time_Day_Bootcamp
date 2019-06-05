@@ -16,6 +16,8 @@ git push -u origin master
 # Checking out & in code (run often
 ###################################
 
+git status
+
 # update the local copies of the repository
 git pull
 
@@ -26,4 +28,4 @@ git add <filename> e.g. hello_world.py
 git commit -m "This is the commit message."
 
 # upload the new or updated file to the repository
-git push
+git push --optional: remote branch

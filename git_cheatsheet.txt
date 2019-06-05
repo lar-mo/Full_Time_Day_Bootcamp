@@ -4,6 +4,10 @@
 # Prerequisites (run once)
 ##########################
 
+git init
+
+git remote add origin https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
+
 git clone https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
 
 git push -u origin master

@@ -6,9 +6,9 @@
 
 git init
 
-git remote add origin https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
+git remote add origin <url> e.g. https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
 
-git clone https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
+git clone <url> e.g. https://github.com/lar-mo/Day-Time_Full_Bootcamp.git
 
 git push -u origin master
 
@@ -20,7 +20,7 @@ git push -u origin master
 git pull
 
 # add (or update) a file
-git add <filename>
+git add <filename> e.g. hello_world.py
 
 # Give a description of the changes
 git commit -m "This is the commit message."

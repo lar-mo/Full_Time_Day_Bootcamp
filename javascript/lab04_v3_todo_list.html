@@ -30,6 +30,16 @@
         margin: 0 8px 0;
         padding-top: 18.720px;
       }
+      #saveTasksBtn {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+      }
+      #getTasksBtn {
+        position: absolute;
+        top: 60px;
+        left: 40px;
+      }
       #desktop {
         background-image: url(https://lar-mo.com/images/virtual_desk.jpg);
         min-height: 100%;
@@ -57,7 +67,7 @@
         flex-direction: column;
         align-items: stretch;
         justify-content:flex-start;
-        background-image:url("data:image/gif;base64,R0lGODlhFgAsAJEAAP////n8/ePv9gAAACH5BAAHAP8ALAAAAAAWACwAAAInhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrZuFsTyTNeBgOf6zgsFADs=");
+        /* background-image:url("data:image/gif;base64,R0lGODlhFgAsAJEAAP////n8/ePv9gAAACH5BAAHAP8ALAAAAAAWACwAAAInhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrZuFsTyTNeBgOf6zgsFADs="); */
       }
       #paper > div {
         padding: 10px;
@@ -111,7 +121,8 @@
       </div>
     </div>
     <div id="desktop">
-      <div><button id="saveBtn">Save</button></div>
+      <div><button id="saveTasksBtn">Save</button></div>
+      <div><button id="getTasksBtn">Get</button></div>
       <div id="paper">
         <div>
           <h1>Pending Tasks
@@ -149,7 +160,8 @@
         let addTaskBtn = document.querySelector('#addTaskBtn')
         let pendingTaskRows = document.querySelector('#pendingTaskRows')
         let completedTaskRows = document.querySelector('#completedTaskRows')
-        let saveBtn = document.querySelector('#saveBtn')
+        let saveTasksBtn = document.querySelector('#saveTasksBtn')
+        let getTasksBtn = document.querySelector('#getTasksBtn')
 
         addTaskBtn.onclick = function() {
           let newTaskValue = inputNewTask.value
@@ -178,6 +190,7 @@
             span.appendChild(input)
 
             let span_text = document.createElement('span')
+            span_text.setAttribute('class', 'span_text')
             span_text.innerText = newTaskValue
             span.appendChild(span_text)
 
@@ -196,15 +209,30 @@
         }
 
         inputNewTask.addEventListener("keydown", function (event) {
-            if (event.keyCode === 13) {
-                addTaskBtn.click()
-            }
+          if (event.keyCode === 13) {
+              addTaskBtn.click()
+          }
         })
 
-        saveBtn.onclick = function() {
-            let allSpans = document.querySelectorAll('#span_text')
-            let allTasks = allSpans.innerText
-            console.log(allTasks)
+        saveTasksBtn.onclick = function() {
+          let x = document.getElementById('pendingTaskRows').querySelectorAll(".span_text")
+          let y = [].slice.call(x)
+          let z = y.map(function(e) { return e.innerText; }).join(",")
+          localStorage.setItem('allPendingTasks', z)
+          console.log(z)
+
+          let a = document.getElementById('completedTaskRows').querySelectorAll(".span_text")
+          let b = [].slice.call(a)
+          let c = b.map(function(e) { return e.innerText; }).join(",")
+          localStorage.setItem('allCompletedTasks', c)
+          console.log(c)
+        }
+
+        getTasksBtn.onclick = function() {
+          let getAllPendingTasks = localStorage.getItem('allPendingTasks').split(',')
+          let getAllCompletedTasks = localStorage.getItem('allCompletedTasks').split(',')
+          console.log(getAllPendingTasks)
+          console.log(getAllCompletedTasks)
         }
     </script>
   </body>

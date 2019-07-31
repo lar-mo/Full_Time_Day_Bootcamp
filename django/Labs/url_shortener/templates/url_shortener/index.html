@@ -15,30 +15,51 @@
         width: 100%;
       }
       #container {
-        background-color: #CCC;
-        padding: 10px;
+        background-color: rgba(141, 201, 0, 0.5);
         height: 100%;
+        width: 100%;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         justify-content: flex-start;
       }
-      #container > h1 {
+      h1 {
         margin: 0;
+        text-align: center;
+      }
+      #container > div {
+        background-color: rgba(101, 222, 0, 0.9);
+        width: 100%;
+        margin: 0;
+        padding: 20px 40px 40px;
       }
       h2 {
         margin-bottom: 0;
       }
-      hr {
-        width: 100%;
-        margin-top: 25px;
-      }
       #shorten_long_url_form {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        width
       }
       #shorten_long_url_form > input {
         margin: 10px;
+      }
+      #td-long {
+        width: 600px;
+        max-width: 600px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      #td-short {
+         width: 600px;
+      }
+      th {
+        text-align: left;
+      }
+      th:first-child{
+        text-align: right;
       }
     </style>
   </head>
@@ -49,22 +70,33 @@
         <form action="{% url 'url_shortener:saveurl' %}" method="post">
           {% csrf_token %}
           <div id="shorten_long_url_form">
-            <input class="w3-input w3-animate-input" type="text" style="width:230px" name="long_url">
+            <input class="w3-input w3-animate-input" type="text" style="width:230px" name="long_url" required>
             <input type="submit" class="w3-btn w3-black" value="Save"/>
           </div>
         </form>
       </div>
-      <hr/>
       <h2>All Shortened Links</h2>
       {% if shortened_urls %}
-        <ul>
+        <table>
+          <tr align="right">
+            <th>Long URL</th>
+            <th/>
+            <th>Shortcode</th>
+          </tr>
           {% for url in shortened_urls %}
-            <li>{{url.code}} => {{url.long_url}}</li>
+          <tr>
+            <td id="td-long">{{url.long_url}}</td>
+            <td><b>&#8594;</b></td>
+            <td id="td-short"><a href="{{url.code}}/" target="_blank">{{url.code}}</a></td>
+          </tr>
           {% endfor %}
-        </ul>
+        </table>
       {% else %}
         <p>No URLs are available.</p>
       {% endif %}
-    </div>
+    </div> <!-- end of 'container'-->
+    <script type="text/javascript">
+
+    </script>
   </body>
 </html>

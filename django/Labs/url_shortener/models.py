@@ -1,6 +1,6 @@
 from django.db import models
 
-class URL(models.Model):
+class shortened_url(models.Model):
     code = models.CharField(max_length=200)
     long_url = models.CharField(max_length=200)
 

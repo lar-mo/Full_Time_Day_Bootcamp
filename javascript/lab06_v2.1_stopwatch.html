@@ -170,6 +170,7 @@
                 laps.innerText = ''
                 lap_times.innerHTML = ''
                 counter = 0
+                prev_sec = 0
               }
             }
 
@@ -274,9 +275,7 @@
           laps.innerText = ''                              // remove Lap Times label
           lap_times.innerHTML = ''                         // remove lap times (list items)
           counter = 0                                      // reset counter
-          current_time = ''
-          lap_time = '00:00:00.000'
-          lap_time_sec = 0
+          prev_sec = 0                                     // reset prev_sec
         }                                                  //
       }                                                    //
 

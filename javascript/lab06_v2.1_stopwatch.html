@@ -121,6 +121,8 @@
             let laps = document.querySelector('#laps')
             let lap_times = document.querySelector('#lap_times')
             let counter = 0
+            let current_time = ''
+            let prev_sec = 0
 
             let curr_time = new Date()
             curr_time.setHours(0,0,0,0)
@@ -176,10 +178,34 @@
 
             // LAP BUTTON
             bt_lap.onclick = function() {
+              current_time = sw_display.innerText
+              let ct = current_time.split(":"
+              let curr_sec = ct[0]*3600+ct[1]*60+ct[2]*1
+              let lap_time_sec = curr_sec - prev_sec
+              let lap_time_trim = lap_time_sec.toFixed(3)
+
+              let hours = Math.floor(lap_time_trim / 3600);
+              hours = hours < 10 ? '0'+hours : hours
+              lap_time_trim %= 3600;
+              let minutes = Math.floor(lap_time_trim / 60);
+              minutes = minutes < 10 ? '0'+minutes : minutes
+              let seconds = lap_time_trim % 60;
+              let lap_time = ''
+              if (hours == 0 && minutes == 0) {
+                lap_time = seconds
+              } else if (hours == 0) {
+                lap_time = minutes + ":" + seconds
+              } else {
+                lap_time = hours + ":" + minutes + ":" + seconds
+              }
+
               let li = document.createElement('li')
               counter++
-              li.innerText = "Lap " + counter + ": " + sw_display.innerText
+              li.innerText = "Lap " + counter + ": " + lap_time
               lap_times.appendChild(li)
+
+              prev_sec = curr_sec
+
             }
             &lt;/script&gt;
           </pre>
@@ -282,7 +308,7 @@
 
         let li = document.createElement('li')              // create list item
         counter++                                          // increment the lap counter
-        li.innerText = "Lap " + counter + ": " + lap_time + "; Total: " +  current_time // update li innerText with lap time
+        li.innerText = "Lap " + counter + ": " + lap_time  // update li innerText with lap time
         lap_times.appendChild(li)                          // add li to the page
 
         prev_sec = curr_sec                                // save "new" prev time

@@ -294,7 +294,7 @@
       bt_lap.onclick = function() {                        // listen for Lap button clicks
         current_time = sw_display.innerText                // when Lap button is pressed, take curr time
         let ct = current_time.split(":")                   // split hh:mm:ss on colons
-        let curr_sec = ct[0]*3600+ct[1]*60+ct[2]*1         // convert hh:mm:ss.mmm to seconds
+        let curr_sec = ct[0]*3600+ct[1]*60+ct[2]*1         // convert hh:mm:ss.ms to seconds
         let lap_time_sec = curr_sec - prev_sec             // Lap time is curr time - prev lap time
         let lap_time_trim = lap_time_sec.toFixed(3)        // limit to 3 decimal places (0.5899999999 > 0.590)
 
@@ -307,13 +307,14 @@
         seconds = seconds < 10 ? '0'+seconds : seconds     // padding for seconds < 10
         seconds = parseFloat(seconds).toFixed(3)           // limit to 3 decimal places (0.5899999999 > 0.590)
 
-        let lap_time = ''                                  // reset lap_time variable
-        if (hours == 0 && minutes == 0) {                  // if there are only secs.mmm,
+        let lap_time = ''                                  // reset lap_time variable (maybe not req'd)
+        if (hours == 0 && minutes == 0) {                  // if there are only secs.ms,
           lap_time = seconds + " seconds"                  // show only the seconds
-        } else if (hours == 0) {                           // if there are mins and secs.mmm,
-          lap_time = minutes + ":" + seconds               // show both minutes and seconds
-        } else {                                           // if there are hours, mins, and secs,
-          lap_time = hours + ":" + minutes + ":" + seconds // show all three (hrs, min, secs.mmm)
+        } else if (hours == 0) {                           // if there are mins and secs.ms,
+        } lap_time = minutes + " minutes, " + seconds + " seconds" // show both minutes and seconds
+          else {                                           // if there are hours, mins, and secs,
+                                                           // show all three (hrs, min, secs.ms)
+          lap_time = hours + " hours, " + minutes + " minutes, " + seconds + " seconds"
         }
 
         let li = document.createElement('li')              // create list item

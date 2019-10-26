@@ -191,6 +191,9 @@
               let minutes = Math.floor(lap_time_trim / 60);
               minutes = minutes < 10 ? '0'+minutes : minutes
               let seconds = lap_time_trim % 60;
+              seconds = seconds < 10 ? '0'+seconds : seconds
+              seconds = parseFloat(seconds).toFixed(3)
+
               let lap_time = ''
               if (hours == 0 && minutes == 0) {
                 lap_time = seconds

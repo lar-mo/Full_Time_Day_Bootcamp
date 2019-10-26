@@ -268,6 +268,7 @@
         // CLEAR BUTTON
         bt_clear.onclick = function() {                    // listen for Clear button clicks
           clearInterval(stopwatch)                         // halt the stopwatch
+          bt_start.removeAttribute('disabled')             // set Start button to 'active' (remove 'disabled')
           bt_lap.setAttribute('disabled','true')           // set Lap button to 'inactive' (add 'disabled')
           bt_stop.setAttribute('disabled','true')          // set Stop button to 'inactive' (add 'disabled')
           bt_clear.setAttribute('disabled','true')         // set Clear button to 'inactive' (add 'disabled')
@@ -301,6 +302,8 @@
         minutes = minutes < 10 ? '0'+minutes : minutes     // padding for minutes < 10
         let seconds = lap_time_trim % 60;                  // remainder of secs when divided by 60 (min/hr)
         seconds = seconds < 10 ? '0'+seconds : seconds     // padding for seconds < 10
+        seconds = parseFloat(seconds).toFixed(3)           // limit to 3 decimal places (0.5899999999 > 0.590)
+
         let lap_time = ''                                  // reset lap_time variable
         if (hours == 0 && minutes == 0) {                  // if there are only secs.mmm,
           lap_time = seconds + " seconds"                  // show only the seconds

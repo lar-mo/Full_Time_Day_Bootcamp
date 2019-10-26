@@ -263,6 +263,7 @@
         bt_stop.onclick = function() {                     // listen for Stop button clicks
           clearInterval(stopwatch)                         // halt the stopwatch
           bt_stop.setAttribute('disabled','true')          // set Stop button to 'inactive' (add 'disabled')
+          bt_start.removeAttribute('disabled')             // set Start button to 'active' (remove 'disabled')
         }                                                  //
         // CLEAR BUTTON
         bt_clear.onclick = function() {                    // listen for Clear button clicks
@@ -280,7 +281,10 @@
       }                                                    //
 
       // START BUTTON
-      bt_start.onclick = startCounter                      // listen for Start button clicks, exec function
+      bt_start.onclick = function() {
+        startCounter()                                     // listen for Start button clicks, exec function
+        bt_start.setAttribute('disabled','true')           // set Start button to 'inactive' (add 'disabled')
+      }
 
       // LAP BUTTON
       bt_lap.onclick = function() {                        // listen for Lap button clicks
@@ -288,21 +292,22 @@
         let ct = current_time.split(":")                   // split hh:mm:ss on colons
         let curr_sec = ct[0]*3600+ct[1]*60+ct[2]*1         // convert hh:mm:ss.mmm to seconds
         let lap_time_sec = curr_sec - prev_sec             // Lap time is curr time - prev lap time
-        let lap_time_trim = lap_time_sec.toFixed(3)
+        let lap_time_trim = lap_time_sec.toFixed(3)        // limit to 3 decimal places (0.5899999999 > 0.590)
 
-        let hours = Math.floor(lap_time_trim / 3600);
-        hours = hours < 10 ? '0'+hours : hours
-        lap_time_trim %= 3600;
-        let minutes = Math.floor(lap_time_trim / 60);
-        minutes = minutes < 10 ? '0'+minutes : minutes
-        let seconds = lap_time_trim % 60;
-        let lap_time = ''
-        if (hours == 0 && minutes == 0) {
-          lap_time = seconds
-        } else if (hours == 0) {
-          lap_time = minutes + ":" + seconds
-        } else {
-          lap_time = hours + ":" + minutes + ":" + seconds
+        let hours = Math.floor(lap_time_trim / 3600);      // get number of whole hours from seconds
+        hours = hours < 10 ? '0'+hours : hours             // padding for hours < 10
+        lap_time_trim %= 3600;                             // remainder of secs when divided by 3600 (sec/hr)
+        let minutes = Math.floor(lap_time_trim / 60);      // get number of whole minutes from remainder secs
+        minutes = minutes < 10 ? '0'+minutes : minutes     // padding for minutes < 10
+        let seconds = lap_time_trim % 60;                  // remainder of secs when divided by 60 (min/hr)
+        seconds = seconds < 10 ? '0'+seconds : seconds     // padding for seconds < 10
+        let lap_time = ''                                  // reset lap_time variable
+        if (hours == 0 && minutes == 0) {                  // if there are only secs.mmm,
+          lap_time = seconds + " seconds"                  // show only the seconds
+        } else if (hours == 0) {                           // if there are mins and secs.mmm,
+          lap_time = minutes + ":" + seconds               // show both minutes and seconds
+        } else {                                           // if there are hours, mins, and secs,
+          lap_time = hours + ":" + minutes + ":" + seconds // show all three (hrs, min, secs.mmm)
         }
 
         let li = document.createElement('li')              // create list item

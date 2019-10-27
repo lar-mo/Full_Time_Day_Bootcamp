@@ -311,8 +311,8 @@
         if (hours == 0 && minutes == 0) {                  // if there are only secs.ms,
           lap_time = seconds + " seconds"                  // show only the seconds
         } else if (hours == 0) {                           // if there are mins and secs.ms,
-        } lap_time = minutes + " minutes, " + seconds + " seconds" // show both minutes and seconds
-          else {                                           // if there are hours, mins, and secs,
+          lap_time = minutes + " minutes, " + seconds + " seconds" // show both minutes and seconds
+        } else {                                           // if there are hours, mins, and secs,
                                                            // show all three (hrs, min, secs.ms)
           lap_time = hours + " hours, " + minutes + " minutes, " + seconds + " seconds"
         }

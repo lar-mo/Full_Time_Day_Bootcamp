@@ -180,7 +180,7 @@
             // LAP BUTTON
             bt_lap.onclick = function() {
               current_time = sw_display.innerText
-              let ct = current_time.split(":"
+              let ct = current_time.split(":")
               let curr_sec = ct[0]*3600+ct[1]*60+ct[2]*1
               let lap_time_sec = curr_sec - prev_sec
               let lap_time_trim = lap_time_sec.toFixed(3)

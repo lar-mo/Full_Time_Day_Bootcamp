@@ -71,6 +71,9 @@
     </style>
   </head>
   <body>
+    {% if message == "error" %}
+      <div style="background-color:red;color:white;">That is not a valid shortcode.</div>
+    {% endif %}
     <div id="container">
       <div>
         <h1>Generate a new shortcode</h1>

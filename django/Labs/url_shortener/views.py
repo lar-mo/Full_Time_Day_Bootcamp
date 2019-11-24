@@ -6,8 +6,9 @@ import string
 import random
 
 def index(request):
+    message = request.GET.get('message', '')
     shortened_urls = shortened_url.objects.order_by('-id')
-    context = {'shortened_urls': shortened_urls}
+    context = {'shortened_urls': shortened_urls, 'message': message}
     return render(request, 'url_shortener/index.html', context)
 
 def saveurl(request):
@@ -31,6 +32,10 @@ def saveurl(request):
     return HttpResponseRedirect(reverse('url_shortener:index'))
 
 def redir_to_long_url(request, code):
-    url_object = shortened_url.objects.get(code=code)
-    print(url_object.long_url)
-    return redirect(url_object.long_url)
+    try:
+        url_object = shortened_url.objects.get(code=code)
+        # print(url_object.long_url)
+        return redirect(url_object.long_url)
+    except:
+        print("That's a bad shortcode.")
+        return HttpResponseRedirect(reverse('url_shortener:index')+'?message=error')

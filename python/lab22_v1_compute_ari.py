@@ -19,12 +19,16 @@ import string
 import re
 
 # Get the file
-response = requests.get("http://www.gutenberg.org/files/74/74-0.txt")
-book_title = "The Adventures of Tom Sawyer by Mark Twain"
+# response = requests.get("http://www.gutenberg.org/files/74/74-0.txt")
+# book_title = "The Adventures of Tom Sawyer by Mark Twain"
 # response = requests.get("http://www.gutenberg.org/cache/epub/31168/pg31168.txt")
 # book_title = "Astounding Stories"
 # response = requests.get("http://www.veryabc.cn/movie/uploads/script/Dialog-TheShawshankRedemption.txt")
 # book_title = "The Shawshank Redemption"
+# response = requests.get("https://raw.githubusercontent.com/lar-mo/miscellaneous_files/master/python/trump-speech-20200605.txt?token=AEE3XUGK66SY7GX4MAFMZK264PEHY")
+# book_title = "Trump Speech - Rose Garden - June 5, 2020"
+response = requests.get("https://raw.githubusercontent.com/lar-mo/miscellaneous_files/master/python/obama-speech-20200603.txt?token=AEE3XUCUHJAGLZZDBO7FDEC64PYCM")
+book_title = "Obama Speech - On George Floyd - June 3, 2020"
 contents = response.text
 
 # Open the file.

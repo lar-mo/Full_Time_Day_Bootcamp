@@ -136,7 +136,6 @@
                 inprog: 0,
                 bt_start: true,
                 bt_stop: false,
-                input_time: true,
                 audio: null
               }, // end of 'data'
               methods: {
@@ -213,11 +212,14 @@
                 reset: function() {
                   this.curr_time.setHours(0,0,0,0)
                   this.ct_display = '00:00:00.000'
-                  this.user_time = null
+                  this.input_time = null
                   clearInterval(this.stopwatch)
-                  this.inprog = 0
                   this.bt_start = true
                   this.bt_stop = false
+                  if (this.inprog != 0) {
+                    this.stopAudio()
+                  }
+                  this.inprog = 0
                 }, // end of 'reset'
                 realtime: function() {
                   let t_user_time = this.user_time
@@ -352,7 +354,6 @@
             clearInterval(this.stopwatch)
             this.bt_start = true
             this.bt_stop = false
-            this.input_time = true
             if (this.inprog != 0) {
               this.stopAudio()
             }

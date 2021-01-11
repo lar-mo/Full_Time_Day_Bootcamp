@@ -1,4 +1,5 @@
 <!-- JavaScript lab: lab06_v4_countdown_timer.html -->
+<!-- isNumber() is from https://stackoverflow.com/questions/39782176/filter-input-text-only-accept-number-and-dot-vue-js -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -93,7 +94,7 @@
           <span class="ct_display">{{ ct_display }}</span>
         </div>
         <div class="flex">
-          <input type="text" v-model="user_time" class="input_time" v-on:input="realtime"  :disabled="inprog != 0">
+          <input type="text" v-model="user_time" class="input_time" v-on:input="realtime" @keypress="isNumber($event)" :disabled="inprog != 0">
           <select class="sl_times" v-model="user_unit" v-on:change="reset" :disabled="inprog != 0">
             <option v-for="time_unit in time_units" :value="time_unit.value">{{ time_unit.text }}</option>
           </select>
@@ -112,7 +113,7 @@
             # UNDER THE HOOD #
             ##################
 
-            VueJS (from &lt;head&gt;): &lt;script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;
+            VueJS (from &lt;head&gt;): &lt;script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"&gt;&lt;/script&gt;
                                               ^^^
             Note: this the development version since this is only a demonstration
 
@@ -236,7 +237,16 @@
                   } else {
                     console.log('something else happened')
                   }
-                } // end of 'realtime'
+                }, // end of 'realtime'
+                isNumber: function(evt) {
+                  evt = (evt) ? evt : window.event;
+                  var charCode = (evt.which) ? evt.which : evt.keyCode;
+                  if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                    evt.preventDefault();;
+                  } else {
+                    return true;
+                  }
+                } // end of 'isNumber'
               }, // end of 'methods'
               computed: {
                 isDisabled_start: function() {
@@ -374,7 +384,16 @@
             } else {
               console.log('something else happened')
             }
-          } // end of 'realtime'
+          }, // end of 'realtime'
+          isNumber: function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();;
+            } else {
+              return true;
+            }
+          } // end of 'isNumber'
         }, // end of 'methods'
         computed: {
         	isDisabled_start: function() {
